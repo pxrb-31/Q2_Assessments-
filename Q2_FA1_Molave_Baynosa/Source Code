@@ -1,0 +1,47 @@
+# Modular Calculator Mini-Program
+
+# Ask until the user types a valid number (float() allows decimals)
+def get_number(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Please enter a valid number.")
+
+
+# Returns (sum, difference, product, quotient)
+def calculate(num1, num2):
+    total = num1 + num2
+    difference = num1 - num2
+    product = num1 * num2
+    # Guard against division by zero
+    quotient = num1 / num2 if num2 != 0 else "Cannot divide by zero."
+    return total, difference, product, quotient
+
+
+# Show 5 instead of 5.0, but leave messages alone
+def format_value(value):
+    return value if isinstance(value, str) else f"{value:g}"
+
+
+def show_results(total, difference, product, quotient):
+    print("Sum:", format_value(total))
+    print("Difference:", format_value(difference))
+    print("Product:", format_value(product))
+    print("Quotient:", format_value(quotient))
+
+
+def main():
+    # Inputs
+    num1 = get_number("Enter first number: ")
+    num2 = get_number("Enter second number: ")
+
+    # Unpack the four returned values
+    total, difference, product, quotient = calculate(num1, num2)
+
+    # Output
+    show_results(total, difference, product, quotient)
+
+
+if __name__ == "__main__":  # Run only when started directly
+    main()
